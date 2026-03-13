@@ -2,7 +2,15 @@
 import { GoogleGenAI } from "@google/genai";
 import { Message } from "../types";
 
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY || '' });
+let aiInstance: GoogleGenAI | null = null;
+
+const getAI = () => {
+  if (!aiInstance) {
+    const apiKey = process.env.GEMINI_API_KEY || process.env.API_KEY || '';
+    aiInstance = new GoogleGenAI({ apiKey });
+  }
+  return aiInstance;
+};
 
 const SYSTEM_INSTRUCTION = `
 You are a mindful AI assistant representing the philosophy of the author 'Ra Tha'. 
@@ -25,6 +33,7 @@ Constraint: Avoid politics, social controversy, and irrelevant topics. Keep it f
 
 export const getDhammaInsight = async (history: Message[], prompt: string): Promise<string> => {
   try {
+    const ai = getAI();
     const response = await ai.models.generateContent({
       model: 'gemini-3-flash-preview',
       contents: [

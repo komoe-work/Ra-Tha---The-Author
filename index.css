@@ -1,0 +1,96 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #8b5cf6;
+  --color-secondary: #d97706;
+  --color-dark-bg: #0f172a;
+  --color-light-bg: #f8fafc;
+  --color-card-bg-dark: #1e293b;
+  --color-card-bg-light: #ffffff;
+}
+
+:root {
+    --primary: #8b5cf6;
+    --secondary: #d97706;
+}
+
+body {
+    font-family: 'Inter', 'Pyidaungsu', sans-serif;
+    font-display: swap;
+    -webkit-tap-highlight-color: transparent;
+    overflow-x: hidden;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.safe-area-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+}
+
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+}
+
+.app-card {
+    border-radius: 20px;
+    transition: all 0.3s ease;
+}
+
+.dark .app-card {
+    background: rgba(30, 41, 59, 0.7);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.light .app-card {
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+}
+
+.app-card:active {
+    transform: scale(0.98);
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-up {
+    animation: fadeInUp 0.4s ease-out forwards;
+}
+
+.mm-text {
+    line-height: 1.8;
+}
+
+.active-nav-icon {
+    color: var(--primary);
+    filter: drop-shadow(0 0 8px rgba(139, 92, 246, 0.5));
+}
+
+.glass-header {
+    transition: all 0.3s ease;
+    backdrop-filter: blur(16px);
+}
+
+.dark .glass-header {
+    background: rgba(15, 23, 42, 0.8);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.light .glass-header {
+    background: rgba(255, 255, 255, 0.85);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.dark body {
+    background-color: #0f172a;
+    color: #f8fafc;
+}
+
+.light body {
+    background-color: #f8fafc;
+    color: #1e293b;
+}
