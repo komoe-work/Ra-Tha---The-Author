@@ -15,160 +15,17 @@ import {
   ChevronRight,
   Sparkles
 } from 'lucide-react';
-import { Tab, Book, Article, Language } from './types';
+import { Tab, Book, Article, Language, Theme } from './types';
 import { BOOKS, ARTICLES, QUOTES, GEMINI_GEM_URL, TRANSLATIONS } from './constants';
 
 // Import extracted components
 import HeroSection from './components/HeroSection';
 import BookCard from './components/BookCard';
 import ActionPanel from './components/ActionPanel';
-
-type Theme = 'light' | 'dark';
-
-// --- Components ---
-
-const Header: React.FC<{ 
-  language: Language; 
-  onToggleLanguage: () => void;
-  theme: Theme;
-  onToggleTheme: () => void;
-}> = ({ language, onToggleLanguage, theme, onToggleTheme }) => (
-  <header className="fixed top-0 w-full z-50 glass-effect border-b premium-border py-4 px-6 flex justify-between items-center bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl shadow-sm dark:shadow-slate-900/50">
-    <motion.div 
-      initial={{ opacity: 0, x: -20 }}
-      animate={{ opacity: 1, x: 0 }}
-      className="flex items-center gap-3"
-    >
-      <div className="w-10 h-10 bg-gradient-to-br from-premium-gold to-amber-600 rounded-full flex items-center justify-center text-white shadow-lg shadow-premium-gold/30">
-        <span className="serif text-xl font-bold">R</span>
-      </div>
-      <span className="serif text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-100">
-        Ra Tha
-      </span>
-    </motion.div>
-    
-    <div className="flex items-center gap-2">
-      <button 
-        onClick={onToggleTheme}
-        aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
-        className="p-2.5 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-all duration-300 text-premium-gold hover:rotate-12"
-      >
-        {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
-      </button>
-      <button 
-        onClick={onToggleLanguage}
-        aria-label="Toggle language"
-        className="flex items-center gap-2 px-4 py-2 rounded-full border premium-border text-xs font-semibold hover:bg-slate-100 dark:hover:bg-slate-800 transition-all glass-effect text-slate-700 dark:text-slate-300"
-      >
-        <Languages size={14} className="text-premium-gold" />
-        <span className={language === 'mm' ? 'text-premium-gold' : 'opacity-50'}>မြန်မာ</span>
-        <span className="opacity-20">|</span>
-        <span className={language === 'en' ? 'text-premium-gold' : 'opacity-50'}>EN</span>
-      </button>
-    </div>
-  </header>
-);
-
-const BottomNav: React.FC<{ activeTab: Tab; onTabChange: (t: Tab) => void; language: Language }> = ({ activeTab, onTabChange, language }) => {
-  const tabs = [
-    { id: Tab.HOME, label: TRANSLATIONS.nav.home[language], icon: Home },
-    { id: Tab.ABOUT, label: TRANSLATIONS.nav.about[language], icon: User },
-    { id: Tab.BOOKS, label: TRANSLATIONS.nav.books[language], icon: BookIcon },
-    { id: Tab.BLOG, label: TRANSLATIONS.nav.blog[language], icon: Newspaper },
-    { id: Tab.CHAT, label: TRANSLATIONS.nav.chat[language], icon: MessageSquare },
-  ];
-
-  return (
-    <nav className="fixed bottom-8 left-1/2 -translate-x-1/2 w-[92%] max-w-lg glass-effect bg-white/90 dark:bg-slate-900/90 border premium-border rounded-full shadow-xl dark:shadow-slate-900/80 safe-area-bottom flex justify-around items-center z-50 py-4 px-3 backdrop-blur-2xl">
-      {tabs.map(tab => (
-        <button
-          key={tab.id}
-          onClick={() => onTabChange(tab.id)}
-          aria-label={tab.label}
-          className={`relative flex flex-col items-center gap-1.5 flex-1 py-1 transition-all duration-500 ${
-            activeTab === tab.id ? 'text-premium-gold scale-110' : 'text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100'
-          }`}
-        >
-          {activeTab === tab.id && (
-            <motion.div 
-              layoutId="nav-active"
-              className="absolute -top-2 w-1.5 h-1.5 bg-premium-gold rounded-full shadow-[0_0_10px_rgba(212,175,55,0.8)]"
-            />
-          )}
-          <tab.icon size={24} strokeWidth={activeTab === tab.id ? 2.5 : 2} />
-          <span className="text-[10px] font-bold uppercase tracking-tighter">{tab.label}</span>
-        </button>
-      ))}
-    </nav>
-  );
-};
-
-const Modal: React.FC<{ isOpen: boolean; onClose: () => void; children: React.ReactNode }> = ({ isOpen, onClose, children }) => (
-  <AnimatePresence>
-    {isOpen && (
-      <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-8">
-        <motion.div 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          onClick={onClose}
-          className="absolute inset-0 bg-black/60 dark:bg-black/85 backdrop-blur-md"
-        />
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.9, y: 40 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.9, y: 40 }}
-          className="relative w-full max-w-3xl bg-white dark:bg-slate-800 backdrop-blur-2xl rounded-[3rem] overflow-hidden shadow-2xl max-h-[90vh] flex flex-col border premium-border"
-        >
-          <button 
-            onClick={onClose} 
-            aria-label="Close modal"
-            className="absolute top-6 right-6 z-10 p-3 bg-black/5 dark:bg-white/5 rounded-full hover:bg-black/10 dark:hover:bg-white/10 transition-all duration-300 hover:rotate-90"
-          >
-            <X size={24} />
-          </button>
-          <div className="overflow-y-auto p-8 sm:p-12">
-            {children}
-          </div>
-        </motion.div>
-      </div>
-    )}
-  </AnimatePresence>
-);
-
-const GeminiGemCard: React.FC<{ language: Language }> = ({ language }) => (
-  <motion.div 
-    whileHover={{ y: -8, scale: 1.01 }}
-    className="relative overflow-hidden rounded-[3rem] p-10 bg-gradient-to-br from-premium-gold/20 via-transparent to-premium-gold/5 border premium-border cursor-pointer group glass-effect"
-    onClick={() => window.open(GEMINI_GEM_URL, '_blank')}
-  >
-    <div className="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-30 transition-all duration-700 group-hover:rotate-12 group-hover:scale-125">
-      <Sparkles size={160} className="text-premium-gold" />
-    </div>
-    <div className="relative z-10">
-      <div className="flex items-center gap-5 mb-6">
-        <div className="p-4 bg-gradient-to-br from-premium-gold to-amber-600 rounded-3xl text-white shadow-xl shadow-premium-gold/30 group-hover:rotate-6 transition-transform">
-          <Sparkles size={32} />
-        </div>
-        <div>
-          <span className="text-[11px] font-black text-premium-gold uppercase tracking-[0.3em] block mb-1">
-            {TRANSLATIONS.gemCard.tag[language]}
-          </span>
-          <h3 className="serif text-3xl font-bold text-slate-900 dark:text-slate-100">
-            {TRANSLATIONS.gemCard.title[language]}
-          </h3>
-        </div>
-      </div>
-      <p className="text-base text-slate-600 dark:text-slate-400 mm-text leading-relaxed mb-8 max-w-lg font-light">
-        {TRANSLATIONS.gemCard.desc[language]}
-      </p>
-      <button className="flex items-center gap-3 px-8 py-4 bg-premium-gold text-white rounded-full text-sm font-bold shadow-2xl shadow-premium-gold/30 hover:shadow-premium-gold/50 transition-all group-hover:gap-5">
-        {TRANSLATIONS.gemCard.btn[language]}
-        <ArrowRight size={18} />
-      </button>
-    </div>
-  </motion.div>
-);
+import Header from './components/Header';
+import BottomNav from './components/BottomNav';
+import Modal from './components/Modal';
+import GeminiGemCard from './components/GeminiGemCard';
 
 // --- Main App ---
 

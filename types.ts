@@ -8,6 +8,7 @@ export enum Tab {
 }
 
 export type Language = 'mm' | 'en';
+export type Theme = 'light' | 'dark';
 
 export interface LocalizedString {
   mm: string;
