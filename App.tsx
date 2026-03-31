@@ -302,11 +302,11 @@ const App: React.FC = () => {
                 >
                   <User size={80} />
                 </motion.div>
-                <h2 className="serif text-5xl font-bold tracking-tight">{TRANSLATIONS.about.title[language]}</h2>
+                <h2 className="serif text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight break-words text-balance">{TRANSLATIONS.about.title[language]}</h2>
               </div>
               
               <div className="p-12 sm:p-16 rounded-[4rem] bg-white/60 dark:bg-premium-card-dark/60 border premium-border premium-shadow glass-effect space-y-12 backdrop-blur-3xl">
-                  <p className="serif text-4xl font-medium text-premium-gold italic mm-text leading-snug text-center max-w-3xl mx-auto">
+                  <p className="serif text-3xl sm:text-4xl font-medium text-premium-gold italic mm-text leading-snug text-center max-w-3xl mx-auto">
                     {TRANSLATIONS.about.quote[language]}
                   </p>
                   <div className="space-y-8 text-xl text-zinc-600 dark:text-zinc-300 mm-text leading-loose font-light">
@@ -320,14 +320,14 @@ const App: React.FC = () => {
                      </h4>
                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                         <motion.a 
-                          whileHover={{ y: -5 }}
+                          whileHover={{ y: -5, scale: 1.02 }}
                           href="https://t.me/noblefriendsmm" 
                           target="_blank" 
                           rel="noopener noreferrer"
                           className="flex items-center gap-5 p-6 rounded-3xl bg-zinc-50/50 dark:bg-white/5 border premium-border hover:border-premium-gold transition-all group glass-effect"
                         >
-                          <div className="w-14 h-14 bg-sky-500 rounded-2xl flex items-center justify-center text-white shadow-xl shadow-sky-500/30 group-hover:rotate-12 transition-transform">
-                            <ArrowRight size={28} className="rotate-[-45deg]" />
+                          <div className="w-14 h-14 bg-sky-500 rounded-2xl flex items-center justify-center text-white shadow-xl shadow-sky-500/30 transition-transform hover:scale-110">
+                            <svg viewBox="0 0 24 24" fill="currentColor" className="w-7 h-7"><path d="M20.665 3.717l-17.73 6.837c-1.213.486-1.203 1.163-.222 1.462l4.552 1.42 10.532-6.645c.498-.303.953-.14.579.192l-8.533 7.701-.33 4.955c.488 0 .705-.223.979-.488l2.35-2.287 4.89 3.614c.901.496 1.548.241 1.774-.838l3.205-15.108c.329-1.318-.505-1.917-1.366-1.521z"/></svg>
                           </div>
                           <div>
                             <span className="block text-base font-bold">{TRANSLATIONS.about.telegram[language]}</span>
@@ -336,14 +336,14 @@ const App: React.FC = () => {
                         </motion.a>
 
                         <motion.a 
-                          whileHover={{ y: -5 }}
+                          whileHover={{ y: -5, scale: 1.02 }}
                           href="https://www.facebook.com/share/17iNC1HVq4/" 
                           target="_blank" 
                           rel="noopener noreferrer"
                           className="flex items-center gap-5 p-6 rounded-3xl bg-zinc-50/50 dark:bg-white/5 border premium-border hover:border-premium-gold transition-all group glass-effect"
                         >
-                          <div className="w-14 h-14 bg-blue-600 rounded-2xl flex items-center justify-center text-white shadow-xl shadow-blue-600/30 group-hover:rotate-12 transition-transform">
-                            <ArrowRight size={28} className="rotate-[-45deg]" />
+                          <div className="w-14 h-14 bg-blue-600 rounded-2xl flex items-center justify-center text-white shadow-xl shadow-blue-600/30 transition-transform hover:scale-110">
+                            <svg viewBox="0 0 24 24" fill="currentColor" className="w-7 h-7"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
                           </div>
                           <div>
                             <span className="block text-base font-bold">{TRANSLATIONS.about.facebook[language]}</span>
@@ -387,7 +387,7 @@ const App: React.FC = () => {
               exit={{ opacity: 0, y: -30 }}
               className="space-y-10"
             >
-              <h2 className="serif text-5xl font-bold mb-12 text-center tracking-tight">Wisdom Articles</h2>
+              <h2 className="serif text-3xl sm:text-4xl md:text-5xl font-extrabold mb-12 text-center tracking-tight break-words text-balance">Wisdom Articles</h2>
               <div className="grid grid-cols-1 gap-6">
                 {ARTICLES.map((article, index) => (
                   <motion.article 
@@ -427,7 +427,7 @@ const App: React.FC = () => {
                  <MessageSquare size={56} />
               </motion.div>
               <div className="space-y-6">
-                <h3 className="serif text-5xl font-bold mm-text tracking-tight">{TRANSLATIONS.chat.title[language]}</h3>
+                <h3 className="serif text-3xl sm:text-4xl md:text-5xl font-extrabold mm-text tracking-tight break-words text-balance">{TRANSLATIONS.chat.title[language]}</h3>
                 <p className="text-xl text-zinc-500 dark:text-zinc-400 max-w-lg mm-text leading-relaxed font-light">
                   {TRANSLATIONS.chat.subtitle[language]}
                 </p>
@@ -462,7 +462,7 @@ const App: React.FC = () => {
                 <span className="inline-block text-[11px] font-black text-premium-gold uppercase tracking-[0.3em] px-5 py-2 bg-premium-gold/10 rounded-full">
                   {selectedBook.tag[language]}
                 </span>
-                <h2 className="serif text-5xl font-bold mm-text leading-tight tracking-tight">{selectedBook.title[language]}</h2>
+                <h2 className="serif text-3xl sm:text-4xl md:text-5xl font-extrabold mm-text leading-tight tracking-tight break-words text-balance">{selectedBook.title[language]}</h2>
                 <p className="text-xl text-zinc-500 dark:text-zinc-400 mm-text font-light">{selectedBook.subtitle[language]}</p>
               </div>
             </div>
@@ -526,7 +526,7 @@ const App: React.FC = () => {
       <Modal isOpen={!!selectedArticle} onClose={() => setSelectedArticle(null)}>
         {selectedArticle && (
           <article className="space-y-10">
-            <h2 className="serif text-5xl font-bold mm-text leading-tight tracking-tight">{selectedArticle.title[language]}</h2>
+            <h2 className="serif text-3xl sm:text-4xl md:text-5xl font-extrabold mm-text leading-tight tracking-tight break-words text-balance">{selectedArticle.title[language]}</h2>
             <div className="space-y-8 text-xl text-zinc-600 dark:text-zinc-300 mm-text leading-loose font-light">
               {selectedArticle.content.map((p, i) => (
                 <p key={i}>{p[language]}</p>
