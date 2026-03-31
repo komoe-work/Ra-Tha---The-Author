@@ -175,9 +175,12 @@ const GeminiGemCard: React.FC<{ language: Language }> = ({ language }) => (
 const App: React.FC = () => {
   const [activeTab, setActiveTab] = useState<Tab>(Tab.HOME);
   const [language, setLanguage] = useState<Language>('mm');
-  const [theme, setTheme] = useState<Theme>(() => {
-    const saved = localStorage.getItem('app-theme') as Theme;
-    return saved || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  const [isDarkMode, setIsDarkMode] = useState<boolean>(() => {
+    const saved = localStorage.getItem('app-theme');
+    if (saved !== null) {
+      return saved === 'dark';
+    }
+    return true; // Default to dark mode
   });
   const [isInitialLoading, setIsInitialLoading] = useState(true);
   const [quoteIndex, setQuoteIndex] = useState(0);
@@ -197,9 +200,14 @@ const App: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    document.documentElement.classList.toggle('dark', theme === 'dark');
-    localStorage.setItem('app-theme', theme);
-  }, [theme]);
+    if (isDarkMode) {
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('app-theme', 'dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('app-theme', 'light');
+    }
+  }, [isDarkMode]);
 
   const switchTab = (tab: Tab) => {
     setActiveTab(tab);
@@ -208,7 +216,7 @@ const App: React.FC = () => {
 
   if (isInitialLoading) {
     return (
-      <div className="fixed inset-0 z-[200] bg-gray-50 dark:bg-slate-900 flex items-center justify-center">
+      <div className="fixed inset-0 z-[200] bg-premium-bg flex items-center justify-center transition-colors duration-500">
         <motion.div 
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -223,7 +231,7 @@ const App: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen pb-40 bg-gray-50 dark:bg-slate-900 text-slate-900 dark:text-slate-100 transition-colors duration-300 selection:bg-premium-gold/30">
+    <div className="min-h-screen pb-40 bg-premium-bg text-premium-ink transition-colors duration-300 selection:bg-premium-gold/30">
       {/* Background Orbs */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden -z-10">
         <div className="absolute top-[-10%] right-[-10%] w-[50%] aspect-square bg-premium-gold/5 rounded-full blur-[120px]" />
@@ -233,8 +241,8 @@ const App: React.FC = () => {
       <Header 
         language={language} 
         onToggleLanguage={() => setLanguage(l => l === 'mm' ? 'en' : 'mm')} 
-        theme={theme}
-        onToggleTheme={() => setTheme(t => t === 'light' ? 'dark' : 'light')}
+        theme={isDarkMode ? 'dark' : 'light'}
+        onToggleTheme={() => setIsDarkMode(prev => !prev)}
       />
       
       <main className="pt-36 px-6 max-w-5xl mx-auto">
