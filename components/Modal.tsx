@@ -23,6 +23,14 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => (
         
         {/* Modal Content / Bottom Sheet */}
         <motion.div 
+          drag="y"
+          dragConstraints={{ top: 0, bottom: 0 }}
+          dragElastic={0.1}
+          onDragEnd={(_, info) => {
+            if (info.offset.y > 100 || info.velocity.y > 500) {
+              onClose();
+            }
+          }}
           initial={{ y: "100%", opacity: 0.5 }}
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: "100%", opacity: 0.5 }}
@@ -30,7 +38,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => (
           className="relative w-full md:max-w-3xl bg-premium-bg dark:bg-slate-900 backdrop-blur-2xl rounded-t-[2.5rem] md:rounded-[3rem] overflow-hidden shadow-2xl max-h-[92vh] md:max-h-[90vh] flex flex-col border-t md:border premium-border safe-area-bottom"
         >
           {/* Mobile Handle Bar */}
-          <div className="md:hidden flex justify-center pt-4 pb-2">
+          <div className="md:hidden flex justify-center pt-4 pb-2 cursor-grab active:cursor-grabbing">
             <div className="w-12 h-1.5 bg-slate-300 dark:bg-slate-700 rounded-full opacity-50" />
           </div>
 

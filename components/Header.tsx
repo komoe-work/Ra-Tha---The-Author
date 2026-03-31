@@ -11,7 +11,7 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({ language, onToggleLanguage, theme, onToggleTheme }) => (
-  <header className="fixed top-0 w-full z-50 glass-effect border-b premium-border py-4 px-6 flex justify-between items-center bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl shadow-sm dark:shadow-slate-900/50">
+  <header className="fixed top-0 w-full z-50 glass-effect border-b premium-border safe-area-top pb-4 px-6 flex justify-between items-center bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl shadow-sm dark:shadow-slate-900/50">
     <motion.div 
       initial={{ opacity: 0, x: -20 }}
       animate={{ opacity: 1, x: 0 }}
