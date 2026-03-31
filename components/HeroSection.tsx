@@ -22,12 +22,12 @@ const HeroSection: React.FC<HeroSectionProps> = ({ language, onBooksClick, onCha
         className="space-y-6"
       >
         <motion.h2 
-          className="serif text-3xl sm:text-4xl md:text-5xl font-extrabold text-premium-ink-light dark:text-premium-ink-dark leading-tight tracking-tight break-words text-balance"
+          className="serif text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-slate-100 leading-tight tracking-tight break-words text-balance"
         >
           {TRANSLATIONS.hero.title[language]}
         </motion.h2>
         
-        <p className="text-lg sm:text-xl text-zinc-600 dark:text-zinc-400 mm-text max-w-2xl mx-auto leading-relaxed font-light">
+        <p className="text-lg sm:text-xl text-slate-600 dark:text-slate-400 mm-text max-w-2xl mx-auto leading-relaxed font-light">
           {TRANSLATIONS.hero.subtitle[language]}
         </p>
         

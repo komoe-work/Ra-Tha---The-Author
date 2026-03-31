@@ -33,7 +33,7 @@ const Header: React.FC<{
   theme: Theme;
   onToggleTheme: () => void;
 }> = ({ language, onToggleLanguage, theme, onToggleTheme }) => (
-  <header className="fixed top-0 w-full z-50 glass-effect border-b premium-border py-4 px-6 flex justify-between items-center bg-white/60 dark:bg-black/60 backdrop-blur-xl">
+  <header className="fixed top-0 w-full z-50 glass-effect border-b premium-border py-4 px-6 flex justify-between items-center bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl shadow-sm dark:shadow-slate-900/50">
     <motion.div 
       initial={{ opacity: 0, x: -20 }}
       animate={{ opacity: 1, x: 0 }}
@@ -42,7 +42,7 @@ const Header: React.FC<{
       <div className="w-10 h-10 bg-gradient-to-br from-premium-gold to-amber-600 rounded-full flex items-center justify-center text-white shadow-lg shadow-premium-gold/30">
         <span className="serif text-xl font-bold">R</span>
       </div>
-      <span className="serif text-2xl font-bold tracking-tight dark:text-premium-ink-dark text-premium-ink-light">
+      <span className="serif text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-100">
         Ra Tha
       </span>
     </motion.div>
@@ -51,14 +51,14 @@ const Header: React.FC<{
       <button 
         onClick={onToggleTheme}
         aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
-        className="p-2.5 rounded-full hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-300 text-premium-gold hover:rotate-12"
+        className="p-2.5 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-all duration-300 text-premium-gold hover:rotate-12"
       >
         {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
       </button>
       <button 
         onClick={onToggleLanguage}
         aria-label="Toggle language"
-        className="flex items-center gap-2 px-4 py-2 rounded-full border premium-border text-xs font-semibold hover:bg-black/5 dark:hover:bg-white/5 transition-all glass-effect"
+        className="flex items-center gap-2 px-4 py-2 rounded-full border premium-border text-xs font-semibold hover:bg-slate-100 dark:hover:bg-slate-800 transition-all glass-effect text-slate-700 dark:text-slate-300"
       >
         <Languages size={14} className="text-premium-gold" />
         <span className={language === 'mm' ? 'text-premium-gold' : 'opacity-50'}>မြန်မာ</span>
@@ -79,14 +79,14 @@ const BottomNav: React.FC<{ activeTab: Tab; onTabChange: (t: Tab) => void; langu
   ];
 
   return (
-    <nav className="fixed bottom-8 left-1/2 -translate-x-1/2 w-[92%] max-w-lg glass-effect bg-white/70 dark:bg-black/70 border premium-border rounded-full premium-shadow safe-area-bottom flex justify-around items-center z-50 py-4 px-3 backdrop-blur-2xl">
+    <nav className="fixed bottom-8 left-1/2 -translate-x-1/2 w-[92%] max-w-lg glass-effect bg-white/90 dark:bg-slate-900/90 border premium-border rounded-full shadow-xl dark:shadow-slate-900/80 safe-area-bottom flex justify-around items-center z-50 py-4 px-3 backdrop-blur-2xl">
       {tabs.map(tab => (
         <button
           key={tab.id}
           onClick={() => onTabChange(tab.id)}
           aria-label={tab.label}
           className={`relative flex flex-col items-center gap-1.5 flex-1 py-1 transition-all duration-500 ${
-            activeTab === tab.id ? 'text-premium-gold scale-110' : 'text-zinc-500 dark:text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200'
+            activeTab === tab.id ? 'text-premium-gold scale-110' : 'text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100'
           }`}
         >
           {activeTab === tab.id && (
@@ -118,7 +118,7 @@ const Modal: React.FC<{ isOpen: boolean; onClose: () => void; children: React.Re
           initial={{ opacity: 0, scale: 0.9, y: 40 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.9, y: 40 }}
-          className="relative w-full max-w-3xl bg-white/95 dark:bg-premium-card-dark/95 backdrop-blur-2xl rounded-[3rem] overflow-hidden shadow-2xl max-h-[90vh] flex flex-col border premium-border"
+          className="relative w-full max-w-3xl bg-white dark:bg-slate-800 backdrop-blur-2xl rounded-[3rem] overflow-hidden shadow-2xl max-h-[90vh] flex flex-col border premium-border"
         >
           <button 
             onClick={onClose} 
@@ -154,12 +154,12 @@ const GeminiGemCard: React.FC<{ language: Language }> = ({ language }) => (
           <span className="text-[11px] font-black text-premium-gold uppercase tracking-[0.3em] block mb-1">
             {TRANSLATIONS.gemCard.tag[language]}
           </span>
-          <h3 className="serif text-3xl font-bold text-premium-ink-light dark:text-premium-ink-dark">
+          <h3 className="serif text-3xl font-bold text-slate-900 dark:text-slate-100">
             {TRANSLATIONS.gemCard.title[language]}
           </h3>
         </div>
       </div>
-      <p className="text-base text-zinc-600 dark:text-zinc-400 mm-text leading-relaxed mb-8 max-w-lg font-light">
+      <p className="text-base text-slate-600 dark:text-slate-400 mm-text leading-relaxed mb-8 max-w-lg font-light">
         {TRANSLATIONS.gemCard.desc[language]}
       </p>
       <button className="flex items-center gap-3 px-8 py-4 bg-premium-gold text-white rounded-full text-sm font-bold shadow-2xl shadow-premium-gold/30 hover:shadow-premium-gold/50 transition-all group-hover:gap-5">
@@ -208,7 +208,7 @@ const App: React.FC = () => {
 
   if (isInitialLoading) {
     return (
-      <div className="fixed inset-0 z-[200] bg-premium-bg-light dark:bg-premium-bg-dark flex items-center justify-center">
+      <div className="fixed inset-0 z-[200] bg-gray-50 dark:bg-slate-900 flex items-center justify-center">
         <motion.div 
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -216,14 +216,14 @@ const App: React.FC = () => {
         >
           <div className="w-20 h-20 border-2 border-premium-gold border-t-transparent rounded-full animate-spin mb-8" />
           <h1 className="serif text-4xl font-bold tracking-[0.2em] text-premium-gold">RA THA</h1>
-          <p className="mt-3 text-xs font-black uppercase tracking-[0.5em] text-zinc-400">The Author</p>
+          <p className="mt-3 text-xs font-black uppercase tracking-[0.5em] text-slate-400">The Author</p>
         </motion.div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen pb-40 bg-premium-bg-light dark:bg-premium-bg-dark transition-colors duration-700 selection:bg-premium-gold/30">
+    <div className="min-h-screen pb-40 bg-gray-50 dark:bg-slate-900 text-slate-900 dark:text-slate-100 transition-colors duration-300 selection:bg-premium-gold/30">
       {/* Background Orbs */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden -z-10">
         <div className="absolute top-[-10%] right-[-10%] w-[50%] aspect-square bg-premium-gold/5 rounded-full blur-[120px]" />
@@ -254,7 +254,7 @@ const App: React.FC = () => {
                 onChatClick={() => switchTab(Tab.CHAT)} 
               />
 
-              <section className="relative py-20 px-10 rounded-[4rem] bg-white/40 dark:bg-white/5 border premium-border overflow-hidden text-center glass-effect premium-shadow">
+              <section className="relative py-20 px-10 rounded-[4rem] bg-white dark:bg-slate-800 border premium-border overflow-hidden text-center glass-effect shadow-md dark:shadow-slate-900/50">
                 <div className="absolute top-0 left-0 p-10 opacity-10">
                   <span className="serif text-[12rem] leading-none text-premium-gold">"</span>
                 </div>
@@ -265,7 +265,7 @@ const App: React.FC = () => {
                     animate={{ opacity: 1, scale: 1, y: 0 }}
                     exit={{ opacity: 0, scale: 1.05, y: -10 }}
                     transition={{ duration: 0.8 }}
-                    className="serif text-3xl sm:text-4xl font-medium text-premium-ink-light dark:text-premium-ink-dark mm-text italic leading-relaxed relative z-10 min-h-[160px] flex items-center justify-center px-4"
+                    className="serif text-3xl sm:text-4xl font-medium text-slate-900 dark:text-slate-100 mm-text italic leading-relaxed relative z-10 min-h-[160px] flex items-center justify-center px-4"
                   >
                     {QUOTES[quoteIndex][language]}
                   </motion.p>
@@ -275,7 +275,7 @@ const App: React.FC = () => {
                     <button 
                       key={i} 
                       onClick={() => setQuoteIndex(i)}
-                      className={`h-1.5 rounded-full transition-all duration-700 ${quoteIndex === i ? 'w-12 bg-premium-gold shadow-[0_0_10px_rgba(212,175,55,0.5)]' : 'w-3 bg-zinc-300 dark:bg-zinc-700 hover:bg-zinc-400'}`} 
+                      className={`h-1.5 rounded-full transition-all duration-700 ${quoteIndex === i ? 'w-12 bg-premium-gold shadow-[0_0_10px_rgba(212,175,55,0.5)]' : 'w-3 bg-slate-300 dark:bg-slate-700 hover:bg-slate-400'}`} 
                     />
                   ))}
                 </div>
@@ -305,17 +305,17 @@ const App: React.FC = () => {
                 <h2 className="serif text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight break-words text-balance">{TRANSLATIONS.about.title[language]}</h2>
               </div>
               
-              <div className="p-12 sm:p-16 rounded-[4rem] bg-white/60 dark:bg-premium-card-dark/60 border premium-border premium-shadow glass-effect space-y-12 backdrop-blur-3xl">
+              <div className="p-12 sm:p-16 rounded-[4rem] bg-white dark:bg-slate-800 border premium-border shadow-md dark:shadow-slate-900/50 glass-effect space-y-12 backdrop-blur-3xl">
                   <p className="serif text-3xl sm:text-4xl font-medium text-premium-gold italic mm-text leading-snug text-center max-w-3xl mx-auto">
                     {TRANSLATIONS.about.quote[language]}
                   </p>
-                  <div className="space-y-8 text-xl text-zinc-600 dark:text-zinc-300 mm-text leading-loose font-light">
+                  <div className="space-y-8 text-xl text-slate-600 dark:text-slate-300 mm-text leading-loose font-light">
                     <p>{TRANSLATIONS.about.p1[language]}</p>
                     <p>{TRANSLATIONS.about.p2[language]}</p>
                   </div>
 
                   <div className="pt-12 border-t premium-border">
-                     <h4 className="text-[11px] font-black text-zinc-400 uppercase tracking-[0.4em] mb-8 text-center">
+                     <h4 className="text-[11px] font-black text-slate-400 uppercase tracking-[0.4em] mb-8 text-center">
                        {TRANSLATIONS.about.connect[language]}
                      </h4>
                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -324,14 +324,14 @@ const App: React.FC = () => {
                           href="https://t.me/noblefriendsmm" 
                           target="_blank" 
                           rel="noopener noreferrer"
-                          className="flex items-center gap-5 p-6 rounded-3xl bg-zinc-50/50 dark:bg-white/5 border premium-border hover:border-premium-gold transition-all group glass-effect"
+                          className="flex items-center gap-5 p-6 rounded-3xl bg-slate-50/50 dark:bg-white/5 border premium-border hover:border-premium-gold transition-all group glass-effect"
                         >
                           <div className="w-14 h-14 bg-sky-500 rounded-2xl flex items-center justify-center text-white shadow-xl shadow-sky-500/30 transition-transform hover:scale-110">
                             <svg viewBox="0 0 24 24" fill="currentColor" className="w-7 h-7"><path d="M20.665 3.717l-17.73 6.837c-1.213.486-1.203 1.163-.222 1.462l4.552 1.42 10.532-6.645c.498-.303.953-.14.579.192l-8.533 7.701-.33 4.955c.488 0 .705-.223.979-.488l2.35-2.287 4.89 3.614c.901.496 1.548.241 1.774-.838l3.205-15.108c.329-1.318-.505-1.917-1.366-1.521z"/></svg>
                           </div>
                           <div>
-                            <span className="block text-base font-bold">{TRANSLATIONS.about.telegram[language]}</span>
-                            <span className="block text-sm text-zinc-500">Join our community</span>
+                            <span className="block text-base font-bold text-slate-900 dark:text-slate-100">{TRANSLATIONS.about.telegram[language]}</span>
+                            <span className="block text-sm text-slate-500 dark:text-slate-400">Join our community</span>
                           </div>
                         </motion.a>
 
@@ -340,14 +340,14 @@ const App: React.FC = () => {
                           href="https://www.facebook.com/share/17iNC1HVq4/" 
                           target="_blank" 
                           rel="noopener noreferrer"
-                          className="flex items-center gap-5 p-6 rounded-3xl bg-zinc-50/50 dark:bg-white/5 border premium-border hover:border-premium-gold transition-all group glass-effect"
+                          className="flex items-center gap-5 p-6 rounded-3xl bg-white dark:bg-slate-800 border premium-border shadow-md dark:shadow-slate-900/50 hover:border-premium-gold transition-all group glass-effect"
                         >
                           <div className="w-14 h-14 bg-blue-600 rounded-2xl flex items-center justify-center text-white shadow-xl shadow-blue-600/30 transition-transform hover:scale-110">
                             <svg viewBox="0 0 24 24" fill="currentColor" className="w-7 h-7"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
                           </div>
                           <div>
-                            <span className="block text-base font-bold">{TRANSLATIONS.about.facebook[language]}</span>
-                            <span className="block text-sm text-zinc-500">Follow official page</span>
+                            <span className="block text-base font-bold text-slate-900 dark:text-slate-100">{TRANSLATIONS.about.facebook[language]}</span>
+                            <span className="block text-sm text-slate-500 dark:text-slate-400">Follow official page</span>
                           </div>
                         </motion.a>
                      </div>
@@ -390,19 +390,19 @@ const App: React.FC = () => {
               <h2 className="serif text-3xl sm:text-4xl md:text-5xl font-extrabold mb-12 text-center tracking-tight break-words text-balance">Wisdom Articles</h2>
               <div className="grid grid-cols-1 gap-6">
                 {ARTICLES.map((article, index) => (
-                  <motion.article 
-                    key={article.id} 
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.05 }}
-                    onClick={() => setSelectedArticle(article)}
-                    className="group p-10 rounded-[2.5rem] bg-white/60 dark:bg-premium-card-dark/60 border premium-border premium-shadow glass-effect flex justify-between items-center cursor-pointer hover:border-premium-gold transition-all backdrop-blur-xl"
-                  >
+                    <motion.article 
+                      key={article.id} 
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: index * 0.05 }}
+                      onClick={() => setSelectedArticle(article)}
+                      className="group p-10 rounded-[2.5rem] bg-white dark:bg-slate-800 border premium-border shadow-md dark:shadow-slate-900/50 glass-effect flex justify-between items-center cursor-pointer hover:border-premium-gold transition-all backdrop-blur-xl"
+                    >
                     <div className="flex-1 pr-8">
-                      <h4 className="serif text-3xl font-bold mm-text group-hover:text-premium-gold transition-colors leading-tight">{article.title[language]}</h4>
-                      <p className="text-base text-zinc-500 dark:text-zinc-400 mt-4 line-clamp-1 mm-text font-light">{article.preview[language]}</p>
+                      <h4 className="serif text-3xl font-bold mm-text group-hover:text-premium-gold transition-colors leading-tight text-slate-900 dark:text-slate-100">{article.title[language]}</h4>
+                      <p className="text-base text-slate-500 dark:text-slate-400 mt-4 line-clamp-1 mm-text font-light">{article.preview[language]}</p>
                     </div>
-                    <div className="w-12 h-12 rounded-full bg-zinc-50 dark:bg-white/5 flex items-center justify-center text-zinc-400 group-hover:bg-premium-gold group-hover:text-white transition-all group-hover:translate-x-2">
+                    <div className="w-12 h-12 rounded-full bg-slate-50 dark:bg-white/5 flex items-center justify-center text-slate-400 group-hover:bg-premium-gold group-hover:text-white transition-all group-hover:translate-x-2">
                       <ChevronRight size={24} />
                     </div>
                   </motion.article>
@@ -427,8 +427,8 @@ const App: React.FC = () => {
                  <MessageSquare size={56} />
               </motion.div>
               <div className="space-y-6">
-                <h3 className="serif text-3xl sm:text-4xl md:text-5xl font-extrabold mm-text tracking-tight break-words text-balance">{TRANSLATIONS.chat.title[language]}</h3>
-                <p className="text-xl text-zinc-500 dark:text-zinc-400 max-w-lg mm-text leading-relaxed font-light">
+                <h3 className="serif text-3xl sm:text-4xl md:text-5xl font-extrabold mm-text tracking-tight break-words text-balance text-slate-900 dark:text-slate-100">{TRANSLATIONS.chat.title[language]}</h3>
+                <p className="text-xl text-slate-500 dark:text-slate-400 max-w-lg mm-text leading-relaxed font-light">
                   {TRANSLATIONS.chat.subtitle[language]}
                 </p>
               </div>
@@ -437,7 +437,7 @@ const App: React.FC = () => {
               </div>
               <button 
                 onClick={() => switchTab(Tab.HOME)}
-                className="text-[11px] font-black text-zinc-400 uppercase tracking-[0.4em] hover:text-premium-gold transition-all hover:tracking-[0.6em]"
+                className="text-[11px] font-black text-slate-400 uppercase tracking-[0.4em] hover:text-premium-gold transition-all hover:tracking-[0.6em]"
               >
                 {TRANSLATIONS.chat.back[language]}
               </button>
@@ -451,51 +451,51 @@ const App: React.FC = () => {
         {selectedBook && (
           <div className="space-y-12">
             <div className="flex flex-col md:flex-row gap-12 items-center md:items-start text-center md:text-left">
-              <div className="w-56 h-80 bg-zinc-50 dark:bg-black/20 rounded-3xl border premium-border flex items-center justify-center overflow-hidden shadow-2xl p-8 shrink-0 glass-effect">
+              <div className="w-56 h-80 bg-slate-50 dark:bg-slate-900/50 rounded-3xl border premium-border flex items-center justify-center overflow-hidden shadow-2xl p-8 shrink-0 glass-effect">
                  {selectedBook.imageUrl ? (
                    <img src={selectedBook.imageUrl} alt={selectedBook.title[language]} loading="lazy" className="h-full w-auto object-contain" />
                  ) : (
-                   <BookIcon size={64} className="text-zinc-200" />
+                   <BookIcon size={64} className="text-slate-200 dark:text-slate-700" />
                  )}
               </div>
               <div className="space-y-6">
                 <span className="inline-block text-[11px] font-black text-premium-gold uppercase tracking-[0.3em] px-5 py-2 bg-premium-gold/10 rounded-full">
                   {selectedBook.tag[language]}
                 </span>
-                <h2 className="serif text-3xl sm:text-4xl md:text-5xl font-extrabold mm-text leading-tight tracking-tight break-words text-balance">{selectedBook.title[language]}</h2>
-                <p className="text-xl text-zinc-500 dark:text-zinc-400 mm-text font-light">{selectedBook.subtitle[language]}</p>
+                <h2 className="serif text-3xl sm:text-4xl md:text-5xl font-extrabold mm-text leading-tight tracking-tight break-words text-balance text-slate-900 dark:text-slate-100">{selectedBook.title[language]}</h2>
+                <p className="text-xl text-slate-500 dark:text-slate-400 mm-text font-light">{selectedBook.subtitle[language]}</p>
               </div>
             </div>
             
-            <div className="p-10 bg-zinc-50/50 dark:bg-white/5 rounded-[3rem] border premium-border glass-effect backdrop-blur-xl">
-              <h3 className="text-[11px] font-black text-zinc-400 uppercase tracking-[0.4em] mb-8">
+            <div className="p-10 bg-slate-50/50 dark:bg-slate-900/50 rounded-[3rem] border premium-border glass-effect backdrop-blur-xl">
+              <h3 className="text-[11px] font-black text-slate-400 uppercase tracking-[0.4em] mb-8">
                 {language === 'mm' ? 'အကျဉ်းချုပ်' : 'Summary'}
               </h3>
-              <p className="text-xl text-zinc-600 dark:text-zinc-300 mm-text leading-loose font-light">
+              <p className="text-xl text-slate-600 dark:text-slate-300 mm-text leading-loose font-light">
                 {selectedBook.summary[language]}
               </p>
             </div>
             
             <div className="space-y-6">
-                <h3 className="text-[11px] font-black text-zinc-400 uppercase tracking-[0.4em] ml-4">Key Insights:</h3>
+                <h3 className="text-[11px] font-black text-slate-400 uppercase tracking-[0.4em] ml-4">Key Insights:</h3>
                 <div className="grid grid-cols-1 gap-5">
                   {selectedBook.topics.map((topic, i) => (
                     <motion.div 
                       key={i} 
                       whileHover={{ x: 10 }}
-                      className="flex gap-6 p-8 bg-white/40 dark:bg-white/5 rounded-3xl border premium-border shadow-sm group hover:border-premium-gold transition-all glass-effect"
+                      className="flex gap-6 p-8 bg-white dark:bg-slate-800 border premium-border shadow-sm group hover:border-premium-gold transition-all glass-effect"
                     >
                       <span className="serif w-12 h-12 rounded-full bg-premium-gold/10 flex items-center justify-center text-premium-gold font-bold text-xl shrink-0 border border-premium-gold/20">
                         {i + 1}
                       </span>
-                      <span className="text-xl dark:text-white text-zinc-800 mm-text flex-1 pt-2 font-light">{topic[language]}</span>
+                      <span className="text-xl dark:text-white text-slate-800 mm-text flex-1 pt-2 font-light">{topic[language]}</span>
                     </motion.div>
                   ))}
                 </div>
             </div>
             
             <div className="pt-12 border-t premium-border space-y-8">
-               <h3 className="text-xs font-black text-zinc-400 uppercase tracking-[0.5em] text-center">
+               <h3 className="text-xs font-black text-slate-400 uppercase tracking-[0.5em] text-center">
                  {language === 'mm' ? 'စာအုပ်မှာယူရန် နည်းလမ်းများ' : 'How to Order'}
                </h3>
                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -526,8 +526,8 @@ const App: React.FC = () => {
       <Modal isOpen={!!selectedArticle} onClose={() => setSelectedArticle(null)}>
         {selectedArticle && (
           <article className="space-y-10">
-            <h2 className="serif text-3xl sm:text-4xl md:text-5xl font-extrabold mm-text leading-tight tracking-tight break-words text-balance">{selectedArticle.title[language]}</h2>
-            <div className="space-y-8 text-xl text-zinc-600 dark:text-zinc-300 mm-text leading-loose font-light">
+            <h2 className="serif text-3xl sm:text-4xl md:text-5xl font-extrabold mm-text leading-tight tracking-tight break-words text-balance text-slate-900 dark:text-slate-100">{selectedArticle.title[language]}</h2>
+            <div className="space-y-8 text-xl text-slate-600 dark:text-slate-300 mm-text leading-loose font-light">
               {selectedArticle.content.map((p, i) => (
                 <p key={i}>{p[language]}</p>
               ))}
